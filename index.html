@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#f5f6f7">
+  <meta name="description" content="Remove Element — 広告などのじゃまな要素を選んで非表示にするブラウザ拡張機能">
+  <title>Remove Element</title>
+  <style>
+    :root{color-scheme:light;--ink:#202124;--muted:#5f6368;--line:#e1e3e6;--blue:#1a73e8;--blue-dark:#155bb5;--bg:#f5f6f7}
+    *{box-sizing:border-box}
+    html,body{min-height:100%;margin:0}
+    body{background:var(--bg);color:var(--ink);font:15px/1.55 Arial,"Noto Sans JP",sans-serif}
+    header{height:72px;display:flex;align-items:center;width:min(1320px,calc(100% - 56px));margin:auto}
+    .hero{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center;width:min(1320px,calc(100% - 56px));margin:20px auto 48px}
+    .copy{padding:10px 0}
+    h1{margin:0 0 25px;font-size:clamp(27px,3vw,38px);line-height:1.28;font-weight:650;letter-spacing:-.035em}
+    .tagline{margin:-10px 0 23px;color:#3c4043;font-size:17px;font-weight:550;line-height:1.5}
+    .points{margin:0 0 30px;padding:0;list-style:none}
+    .points li{display:flex;gap:13px;align-items:flex-start;padding:14px 0;border-top:1px solid var(--line);color:#3c4043;font-size:15px}
+    .points li:last-child{border-bottom:1px solid var(--line)}
+    .num{flex:none;display:grid;place-items:center;width:25px;height:25px;margin-top:-2px;border-radius:50%;background:#e9f0fb;color:#2365ba;font-size:12px;font-weight:700}
+    .download{display:flex;width:min(100%,400px);min-height:62px;align-items:center;justify-content:center;gap:12px;padding:13px 20px;border:0;border-radius:10px;background:var(--blue);color:#fff;text-decoration:none;font-size:17px;font-weight:700;box-shadow:0 8px 20px #1a73e833;transition:background .15s,transform .15s,box-shadow .15s}
+    .download:hover{background:var(--blue-dark);transform:translateY(-2px);box-shadow:0 11px 24px #1a73e844}
+    .download-icon{font-size:23px;line-height:1}
+    .version{margin:10px 0 0;color:var(--muted);font-size:13px}
+    .image-wrap{width:100%;padding:7px;border:1px solid #d8dadd;border-radius:13px;background:#fff;box-shadow:0 12px 34px #20212418}
+    .hero-image{display:block;width:100%;height:auto;border-radius:8px}
+    .install{width:min(1320px,calc(100% - 56px));margin:0 auto 48px;padding-top:25px;border-top:1px solid var(--line)}
+    .install h2{margin:0 0 15px;font-size:20px;letter-spacing:-.02em}
+    .steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+    .step{display:flex;gap:12px;align-items:flex-start;padding:15px 16px;border:1px solid var(--line);border-radius:9px;background:#fff;color:#3c4043;font-size:13px;line-height:1.55}
+    .step b{flex:none;color:var(--blue);font-size:13px}
+    .step code{font-size:12px;color:#202124}
+    .manager-address{display:inline-flex;gap:8px;align-items:center;flex-wrap:wrap;margin-top:7px}
+    .manager-address code{padding:4px 7px;border-radius:5px;background:#f1f3f4}
+    .manager-address button{padding:5px 9px;border:1px solid #dadce0;border-radius:6px;background:#fff;color:#3c4043;font:600 12px Arial,sans-serif;cursor:pointer}
+    .manager-address button:hover{background:#f8f9fa}
+    .contact{display:flex;align-items:center;justify-content:center;gap:22px;width:min(1320px,calc(100% - 56px));margin:0 auto 24px;padding:15px 0;border-top:1px solid var(--line);color:var(--muted);font-size:13px}
+    .contact a{color:#3c4043;text-decoration:none}.contact a:hover{color:var(--blue);text-decoration:underline}.contact-label{margin-right:5px;color:var(--muted)}
+    .lang-switch{display:flex;gap:3px;padding:3px;border:1px solid var(--line);border-radius:8px;background:#fff}
+    .lang-switch button{border:0;border-radius:5px;padding:6px 10px;background:transparent;color:var(--muted);font:600 12px Arial,sans-serif;cursor:pointer}
+    .lang-switch button[aria-pressed="true"]{background:#e9f0fb;color:#185abc}
+    @media(max-width:760px){header{width:calc(100% - 32px);height:60px}.hero{grid-template-columns:1fr;gap:25px;width:calc(100% - 32px);margin:14px auto 30px}.copy{padding:0}h1{font-size:28px;margin-bottom:17px}.tagline{margin:-7px 0 17px;font-size:15px}.points{margin-bottom:23px}.points li{padding:11px 0;font-size:14px}.download{width:100%;min-height:58px;font-size:16px}.install{width:calc(100% - 32px);margin-bottom:28px;padding-top:19px}.steps{grid-template-columns:1fr;gap:8px}.step{padding:12px 13px}}
+    @media(max-width:420px){header{height:54px}.hero{gap:19px;margin-top:8px}.image-wrap{padding:4px;border-radius:9px}.hero-image{border-radius:5px}.points li{gap:10px;font-size:13px}.download{min-height:55px}.contact{width:calc(100% - 32px);gap:13px;flex-wrap:wrap;font-size:12px}}
+  </style>
+  <meta name="google-site-verification" content="LyRfDuRUYksJZFUhuVmuxtJTpkZJOUPSd-Jtx4OINSE" />
+</head>
+<body>
+  <header><div class="lang-switch" role="group" aria-label="Language"><button type="button" data-language="ja" aria-pressed="true">日本語</button><button type="button" data-language="en" aria-pressed="false">English</button></div></header>
+  <main class="hero">
+    <section class="copy" id="copy-section" aria-label="拡張機能の説明">
+      <h1>Remove Element</h1>
+      <p class="tagline" data-ja="広告などのじゃまな要素を選んで非表示に" data-en="Pick distracting elements such as ads and hide them">広告などのじゃまな要素を選んで非表示に</p>
+      <ol class="points">
+        <li><span class="num">1</span><span data-ja="拡張機能のアイコンか、右クリックの「この要素を消す」で表示モードに入る" data-en="Enter display mode with the extension icon or the “Remove this element” context menu">拡張機能のアイコンか、右クリックの「この要素を消す」で表示モードに入る</span></li>
+        <li><span class="num">2</span><span data-ja="ページ上か、画面下の要素ツリーで要素を選んで「消す」（# . や何番目かで指定）" data-en="Pick an element on the page or in the element tree and press Remove (by #id, .class, or position)">ページ上か、画面下の要素ツリーで要素を選んで「消す」（# . や何番目かで指定）</span></li>
+        <li><span class="num">3</span><span data-ja="次からそのサイトでは自動で非表示。ルール一覧からいつでも元に戻せる" data-en="The element stays hidden on that site. Undo any time from the rule list">次からそのサイトでは自動で非表示。ルール一覧からいつでも元に戻せる</span></li>
+      </ol>
+      <a class="download" href="./Remove-Element-v1.9.zip" download><span class="download-icon" aria-hidden="true">↓</span><span data-ja="拡張機能をダウンロード" data-en="Download the extension">拡張機能をダウンロード</span></a>
+      <p class="version">v1.9</p>
+    </section>
+    <div class="image-wrap"><img class="hero-image" id="hero-image" src="./remove-element-guide.png" alt="表示モードで、画面下の要素ツリーから広告の要素を選び、セレクタを指定して消すイメージ" data-ja-alt="表示モードで、画面下の要素ツリーから広告の要素を選び、セレクタを指定して消すイメージ" data-en-alt="In display mode, an ad element is selected in the element tree at the bottom and removed by selector" width="1500" height="844" fetchpriority="high"></div>
+  </main>
+  <section class="install" aria-labelledby="install-title" id="install-section">
+    <h2 id="install-title" data-ja="インストール方法" data-en="How to install">インストール方法</h2>
+    <div class="steps">
+      <div class="step"><b>1</b><span data-ja="上のボタンからZIPをダウンロードし、展開します。" data-en="Download the ZIP above and extract it.">上のボタンからZIPをダウンロードし、展開します。</span></div>
+      <div class="step"><b>2</b><span><span id="manager-instruction">お使いのブラウザーの拡張機能管理ページを開き、デベロッパーモードをオンにします。</span><span class="manager-address"><code id="manager-url">chrome://extensions</code><button id="copy-manager" type="button">アドレスをコピー</button></span></span></div>
+      <div class="step"><b>3</b><span data-ja="「パッケージ化されていない拡張機能を読み込む」を押し、manifest.json が入ったフォルダーを選びます。" data-en="Click Load unpacked and choose the extracted folder containing manifest.json.">「パッケージ化されていない拡張機能を読み込む」を押し、manifest.json が入ったフォルダーを選びます。</span></div>
+    </div>
+  </section>
+  <footer class="contact" aria-label="Contact">
+    <span class="contact-label" data-ja="連絡先" data-en="Contact">連絡先</span>
+    <a href="https://x.com/okcysk46770" target="_blank" rel="noopener noreferrer"><span class="contact-label">X</span>@okcysk46770</a>
+    <a href="mailto:okcysk@gmail.com"><span class="contact-label" data-ja="メール" data-en="Email">メール</span>okcysk@gmail.com</a>
+  </footer>
+  <script>
+    const languageButtons = document.querySelectorAll('[data-language]');
+    function detectBrowser() {
+      const ua = navigator.userAgent;
+      if (/Edg\//.test(ua)) return { name: 'Microsoft Edge', url: 'edge://extensions' };
+      if (/OPR\//.test(ua)) return { name: 'Opera', url: 'opera://extensions' };
+      if (/Vivaldi\//.test(ua)) return { name: 'Vivaldi', url: 'vivaldi://extensions' };
+      if (/Firefox\//.test(ua)) return { name: 'Firefox', url: 'about:addons', supported: false };
+      if (/Chrome\//.test(ua)) return { name: 'Chrome', url: 'chrome://extensions' };
+      return null;
+    }
+    let browser = detectBrowser();
+    let currentLanguage = 'ja';
+    const managerUrl = document.querySelector('#manager-url');
+    const managerInstruction = document.querySelector('#manager-instruction');
+    if (browser) managerUrl.textContent = browser.url;
+    if (navigator.brave?.isBrave) {
+      navigator.brave.isBrave().then(isBrave => {
+        if (isBrave) {
+          browser = { name: 'Brave', url: 'brave://extensions' };
+          managerUrl.textContent = browser.url;
+          setLanguage(currentLanguage);
+        }
+      }).catch(() => {});
+    }
+    document.querySelector('#copy-manager').addEventListener('click', async event => {
+      const button = event.currentTarget;
+      const original = button.textContent;
+      try {
+        await navigator.clipboard.writeText(managerUrl.textContent);
+        button.textContent = document.documentElement.lang === 'ja' ? 'コピーしました' : 'Copied';
+      } catch {
+        button.textContent = document.documentElement.lang === 'ja' ? 'アドレスを選択してコピー' : 'Select and copy the address';
+      }
+      window.setTimeout(() => { button.textContent = original; }, 2200);
+    });
+    function setLanguage(language) {
+      currentLanguage = language;
+      document.documentElement.lang = language;
+      document.querySelectorAll('[data-ja][data-en]').forEach(element => {
+        element.textContent = element.dataset[language];
+      });
+      if (browser?.supported === false) {
+        managerInstruction.textContent = language === 'ja'
+          ? 'Firefoxを検出しました。この拡張機能はChromeまたはChromium系ブラウザーでインストールしてください。アドオン管理: '
+          : 'Firefox detected. Install this extension in Chrome or a Chromium-based browser. Add-ons: ';
+      } else {
+        managerInstruction.textContent = browser
+          ? (language === 'ja' ? `${browser.name}で拡張機能管理ページを開き、デベロッパーモードをオンにします。` : `Open the extension manager in ${browser.name} and turn on Developer mode.`)
+          : (language === 'ja' ? 'ブラウザーを判別できません。ChromeまたはChromium系ブラウザーをお使いください。管理ページ: ' : 'Browser not detected. Use Chrome or a Chromium-based browser. Extension manager: ');
+      }
+      document.querySelector('#copy-manager').textContent = language === 'ja' ? 'アドレスをコピー' : 'Copy address';
+      const image = document.querySelector('#hero-image');
+      image.alt = image.dataset[`${language}Alt`];
+      document.querySelector('#copy-section').setAttribute('aria-label', language === 'ja' ? '拡張機能の説明' : 'About the extension');
+      document.querySelector('#install-section').setAttribute('aria-label', language === 'ja' ? 'インストール方法' : 'Installation steps');
+      languageButtons.forEach(button => button.setAttribute('aria-pressed', String(button.dataset.language === language)));
+    }
+    setLanguage('ja');
+    languageButtons.forEach(button => button.addEventListener('click', () => setLanguage(button.dataset.language)));
+  </script>
+  <!-- 忍者AdMax：このサイト用の広告IDが決まったら data-admax-id に入れてコメントを外す -->
+  <!-- <script async src="https://adm.shinobi.jp/st/auto.js" data-admax-id="ADMAX_ID"></script> -->
+</body>
+</html>

@@ -1,0 +1,23 @@
+{
+    "": [".adsbygoogle", "#popup_bnr", "#google_vignette"],
+    "https://ejje.weblio.jp": ["div#footFixAdBar"],
+    "https://jp.pornhub.com": ["iframe"],
+    "https://jp.spankbang.com": ["iframe", "div.eas-video-slider-player"],
+    "https://www.xvideos.com": ["div#video-right", "div#ad-footer"],
+    "https://www.tokyomotion.net": ["div.top-nav", "iframe", "script", "a > img", "div.fluid_initial_play_button_container", "div#nuevoa", "div.exo-video-slider-container-wrapper", "div.junk-ad-body", "div#divExoLayerWrapper", "div#expCloseButton", "div.group-container", "div.wrapper", "div.sl0vcrz"],
+    "https://www.tokyomotion.net/video": ["div.col-md-4", "iframe"],
+    "https://www.twi-dl.net": ["div.vjs-poster", "div#DLsite_blog_parts_000", "iframe"],
+    "https://jp.xhamster.com": ["div.cookiesAnnounce-30a9a", "div.WLTeD-LEplayer", "div.dbd4cb9e"],
+    "https://nhentai.net": ["section.advertisement", "div.ts-im-container"],
+    "https://qiita.com": ["div.style-n2eps8", "iframe", "header", "nav.style-1l4w6pd", "div.style-1cpeld6", "div.style-uaiz0z", "section.style-1hl01qi", "div.style-1jc77e6"],
+    "https://ja.boardgamearena.com": ["div.cc-window"],
+    "https://www.studiok-i.net/ps/": ["iframe", "div#main_left", "div#main_left2", "div#main_right", "div#main_right2"],
+    "https://www.youtube.com": ["ytd-popup-container", "ytd-ad-slot-renderer", "ytd-engagement-panel-section-list-renderer", "div#player-ads"],
+    "https://ja.wikipedia.org": ["div#frb-inline", "div#centralNotice"],
+    "https://monsnode.com": ["div.r7g41q6"],
+    "https://tktube.com": ["div.root--ujvuu"],
+    "https://toxicstream.com": ["iframe"],
+    "https://www.po-kaki-to.com/": ["iframe"],
+    "https://openload.mov": ["div.pop--excl"],
+    "https://roshutu-shuuti.net/": ["div#ad-overlay-layer"]
+}

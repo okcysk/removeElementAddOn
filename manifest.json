@@ -1,0 +1,26 @@
+{
+  "manifest_version": 3,
+
+  "name": "Remove Element",
+  "version": "1.9",
+
+  "permissions": ["activeTab", "storage", "scripting", "tabs", "webNavigation", "contextMenus"],
+
+  "background": {
+    "service_worker": "background.js"
+  },
+
+  "action": {
+    "default_title": "Remove Element"
+  },
+  "options_page": "options.html",
+
+  "host_permissions": ["<all_urls>"],
+
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["script.js"]
+    }
+  ]
+}

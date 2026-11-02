@@ -1,0 +1,9 @@
+{
+    "https://monsnode.com/twjn.php": ["a#video_link"],
+    "https://jp.spankbang.com": ["button#age-check-yes, span.tap_to_unmute"],
+    "https://jp.pornhub.com/": ["button.buttonOver18"],
+    "https://www.twi-dl.net": ["img.adWrapper_90053430_closer"],
+    "#google_vignette": ["div#dismiss-button"],
+    "https://sakurafile.com": ["input[value='Free Download']"],
+    "https://katfile.com/": ["button#fbtn1", "button#downloadbtn"]
+}
